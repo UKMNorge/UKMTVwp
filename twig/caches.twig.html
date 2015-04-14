@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Caches :: UKM-TV</title>
+		<link rel="stylesheet" href="http://<?= UKM_HOSTNAME ?>/wp-content/themes/UKMresponsive/vendor/bootstrap/3.0.1/css/bootstrap.css">
+		<meta http-equiv="refresh" content="30">
+	</head>
+
+	<body>
+		<div class="UKMwidth">
+			<h1>Caches</h1>
+			
+			<table class="table table-striped">
+			    <tr>
+				    <th class="col-xs-1">ID</th>
+				    <th class="col-xs-3">IP</th>
+				    <th class="col-xs-5">Status</th>
+				    <th class="col-xs-3">Last heartbeat</th>
+				</tr>
+			
+			{% for cache in caches %}
+				<tr>
+					<td>{{ cache.id }}</td>
+					<td>{{ cache.ip }}</td>
+					<td>{{ cache.status }}</td>
+					<td>{{ cache.last_heartbeat }}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		</div>
+	</body>
+</html>
