@@ -8,22 +8,30 @@
 
 	<body>
 		<div class="UKMwidth">
-			<h1>Caches</h1>
+			<h1>Cacher</h1>
+			<p>Alle cacher rapporterer selv inn status. UKM-TV vil ikke sende brukere til deaktiverte cacher. Cachen selv vil ikke vite noe om den er deaktivert, og opererer som normalt hvis den får henvendelser (noe den etter en tid som deaktivert ikke skal få).</p>
 			
 			<table class="table table-striped">
 			    <tr>
 				    <th class="col-xs-1">ID</th>
 				    <th class="col-xs-3">IP</th>
 				    <th class="col-xs-5">Status</th>
-				    <th class="col-xs-3">Last heartbeat</th>
+				    <th class="col-xs-3">Siste heartbeat</th>
 				</tr>
 			
 			{% for cache in caches %}
-				<tr>
+				<tr {{ cache.deactivated ? 'class="alert-danger"' : ''}}>
 					<td>{{ cache.id }}</td>
 					<td>{{ cache.ip }}</td>
-					<td>{{ cache.status }}</td>
+					<td>{{ cache.status }} {{ cache.deactivated ? '<small class="label label-danger">deaktivert</small>' : ''}}</td>
 					<td>{{ cache.last_heartbeat }}</td>
+					<td>
+						{% if cache.deactivated %}
+							<a href="?page=UKMTVwp_network_caches&activate={{ cache.id }}" class="btn btn-xs btn-success">Aktiver cache</a>
+						{% else %}
+							<a href="?page=UKMTVwp_network_caches&deactivate={{ cache.id }}" class="btn btn-xs btn-danger">Deaktiver cache</a>						
+						{% endif %}
+					</td>
 				</tr>
 			{% endfor %}
 			</table>
