@@ -15,6 +15,11 @@ function UKMTVwp_menu_network() {
 	add_action( 'admin_print_styles-' . $page, 'UKMTVwp_scripts_and_styles' );
 	$subpage = add_submenu_page('UKMTVwp_network', 'Caches', 'Caches', 'administrator', 'UKMTVwp_network_caches', 'UKMTVwp_network_caches');
 	add_action( 'admin_print_styles-' . $subpage, 'UKMTVwp_scripts_and_styles' );
+
+
+	$subpage = add_submenu_page('UKMTVwp_network', 'Slett video', 'Slett video', 'administrator', 'UKMTVwp_delete', 'UKMTVwp_delete');
+	add_action( 'admin_print_styles-' . $subpage, 'UKMTVwp_scripts_and_styles' );
+
 } 
 
 
@@ -22,6 +27,10 @@ function UKMTVwp_network_caches() {
 	require_once('UKM/inc/twig-admin.inc.php');
 	require_once('controller/caches.controller.php');
 	echo $controller->render();
+}
+
+function UKMTVwp_delete() {
+	require_once('controller/delete.controller.php');
 }
 
 function UKMTVwp_network() {
