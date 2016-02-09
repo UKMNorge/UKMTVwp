@@ -22,7 +22,11 @@
 						<h3>{{ video.title }}</h3>
 					</div>
 					<div class="row">
+						<a href="{{ video.storageurl }}{{ video.img }}" download="{{ video.title }}" class="btn btn-primary">Kun bilde</a>
 						<a href="{{ video.storageurl }}{{ video.file }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
+					</div>
+					<div class="row">
+						<p>Filene ligger på Dig.Ark i mappen XX.</p>
 					</div>
 				</div>
 				<div class="clearfix"></div>
