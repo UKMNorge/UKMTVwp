@@ -20,6 +20,9 @@ function UKMTVwp_menu_network() {
 	$subpage = add_submenu_page('UKMTVwp_network', 'Slett video', 'Slett video', 'administrator', 'UKMTVwp_delete', 'UKMTVwp_delete');
 	add_action( 'admin_print_styles-' . $subpage, 'UKMTVwp_scripts_and_styles' );
 
+	$subpage = add_submenu_page('UKMTVwp_network', 'Last ned video', 'Last ned video', 'administrator', 'UKMTVwp_download', 'UKMTVwp_download');
+	add_action( 'admin_print_styles-' . $subpage, 'UKMTVwp_scripts_and_styles' );
+
 } 
 
 
@@ -31,6 +34,10 @@ function UKMTVwp_network_caches() {
 
 function UKMTVwp_delete() {
 	require_once('controller/delete.controller.php');
+}
+
+function UKMTVwp_download() {
+	require_once('controller/download.controller.php');
 }
 
 function UKMTVwp_network() {

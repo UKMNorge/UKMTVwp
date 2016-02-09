@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Last ned video :: UKM-TV</title>
+		<link rel="stylesheet" href="http://<?= UKM_HOSTNAME ?>/wp-content/themes/UKMresponsive/vendor/bootstrap/3.0.1/css/bootstrap.css">
+		<meta http-equiv="refresh" content="30">
+	</head>
+
+	<body>
+		<div class="UKMwidth">
+			{% if flash is defined %}
+				<br>
+				<div class="alert alert-{{ flash[0] }}"><span>{{ flash[1]|nl2br }}</span></div>
+			{% endif %}
+			{% if video is defined %}
+				<p>&nbsp;</p>
+				<div class="col-xs-12 col-md-8">
+					<div class="row">
+						<img style="" src="{{ video.storageurl }}{{ video.img }}">
+					</div>
+					<div class="row">
+						<h3>{{ video.title }}</h3>
+					</div>
+					<div class="row">
+						<a href="{{ video.storageurl }}{{ video.file }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			{% endif %}
+			<p>&nbsp;</p>
+			<h1>Last ned video</h1>
+			<p class="lead">Kopier inn URLen fra UKM-tv for å hente nedlastings-lenkene.</p>
+			<form method="GET">
+				<input type="hidden" name="page" value="UKMTVwp_download">
+				<label for="video_url" class="">Lim inn URLen her</label>
+				<input type="text" name="video_url" class="form-control">
+				<small style="font-style: italic;">URLen må slutte med et skråstrek!</small><br>
+				<input type="submit" name="submit" class="btn btn-primary" value="Hent">
+			</form>
+			<p>
+				
+			</p>
+		</div>
+		<div class="UKMwidth">
+		</div>
+	</body>
+</html>
