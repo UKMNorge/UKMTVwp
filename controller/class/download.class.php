@@ -24,24 +24,18 @@ class download_controller extends UKMController {
 
 		$tv = new TV($id);
 		#var_dump($tv);
+		if (!$tv->id) {
+			$this->data['deleted'] = true;
+			return;
+		}
+		
 		$tv->videofile();
+		var_dump($tv);
 		$this->data['video'] = $tv;
 		$this->data['video_url'] = $tv->storageurl . $tv->file;
 		$this->data['file_path'] = $this->findFilePath($tv->cron_id);
 		#var_dump($this->data);
-		return false;
-		// Build query
-		$sql = "SELECT * FROM `ukm_tv_files` WHERE `tv_id` = '#tv_id'";
-		$qry = new SQL($sql, array('tv_id' => $id));
-
-		echo $qry->debug();
-		$res = $qry->run('array');
-		var_dump($res);
-		if (is_array($res)) {
-			$this->data['video'] = $res;
-			return true;
-		}	
-		return false;
+		return;
 	}
 
 	public function findFilePath($id) {

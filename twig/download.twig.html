@@ -2,8 +2,7 @@
 <html>
 	<head>
 		<title>Last ned video :: UKM-TV</title>
-		<link rel="stylesheet" href="http://<?= UKM_HOSTNAME ?>/wp-content/themes/UKMresponsive/vendor/bootstrap/3.0.1/css/bootstrap.css">
-		<meta http-equiv="refresh" content="30">
+		{# <link rel="stylesheet" href="http://<?= UKM_HOSTNAME ?>/wp-content/themes/UKMresponsive/vendor/bootstrap/3.0.1/css/bootstrap.css"> #}
 	</head>
 
 	<body>
@@ -11,6 +10,12 @@
 			{% if flash is defined %}
 				<br>
 				<div class="alert alert-{{ flash[0] }}"><span>{{ flash[1]|nl2br }}</span></div>
+			{% endif %}
+			{% if deleted is defined %}
+				<div class="col-xs-12 col-md-8">
+					<h4 class="alert alert-danger">Videoen er slettet, og kan ikke lastes ned.</h4>
+				</div>
+				<div class="clearfix"></div>
 			{% endif %}
 			{% if video is defined %}
 				<p>&nbsp;</p>
@@ -30,15 +35,14 @@
 						<a href="{{ video.storageurl }}{{ video.file_720p }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Høy kvalitet (720p)</a>
 					</div>
 					<p>&nbsp;</p>
-					
 				</div>
 				<div class="clearfix"></div>
 				<div class="">
 					<span class="alert alert-info">Filene ligger på Dig.Ark i mappen {{ file_path }}</span>
 				</div>
 			<div class="clearfix"></div>
-			{% endif %}
 			<p>&nbsp;</p>
+			{% endif %}
 			<h1>Last ned video</h1>
 			<p class="lead">Kopier inn URLen fra UKM-tv for å hente nedlastings-lenkene.</p>
 			<form method="GET">

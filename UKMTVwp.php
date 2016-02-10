@@ -47,6 +47,6 @@ function UKMTVwp_network() {
 }
 
 function UKMTVwp_scripts_and_styles() {
-	wp_enqueue_script('WPbootstrap3_js');
+	#wp_enqueue_script('WPbootstrap3_js');
 	wp_enqueue_style('WPbootstrap3_css');
 }
