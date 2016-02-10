@@ -30,7 +30,7 @@ class download_controller extends UKMController {
 		}
 		
 		$tv->videofile();
-		var_dump($tv);
+		#var_dump($tv);
 		$this->data['video'] = $tv;
 		$this->data['video_url'] = $tv->storageurl . $tv->file;
 		$this->data['file_path'] = $this->findFilePath($tv->cron_id);
