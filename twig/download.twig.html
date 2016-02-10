@@ -23,14 +23,20 @@
 					</div>
 					<div class="row">
 						<a href="{{ video.storageurl }}{{ video.img }}" download="{{ video.title }}" class="btn btn-primary">Kun bilde</a>
-						<a href="{{ video.storageurl }}{{ video.file }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
+					</div><br />
+					<div class="row">
+						<a href="{{ video.storageurl }}{{ video.file_mobile }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Mobil-kvalitet</a>
+						<a href="{{ video.storageurl }}{{ video.file_orig }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
+						<a href="{{ video.storageurl }}{{ video.file_720p }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Høy kvalitet (720p)</a>
 					</div>
 					<p>&nbsp;</p>
-					<div class="row">
-						<span class="alert alert-info">Filene ligger på Dig.Ark i mappen XX.</span>
-					</div>
+					
 				</div>
 				<div class="clearfix"></div>
+				<div class="">
+					<span class="alert alert-info">Filene ligger på Dig.Ark i mappen {{ file_path }}</span>
+				</div>
+			<div class="clearfix"></div>
 			{% endif %}
 			<p>&nbsp;</p>
 			<h1>Last ned video</h1>
@@ -39,7 +45,7 @@
 				<input type="hidden" name="page" value="UKMTVwp_download">
 				<label for="video_url" class="">Lim inn URLen her</label>
 				<input type="text" name="video_url" class="form-control">
-				<small style="font-style: italic;">URLen må slutte med et skråstrek!</small><br>
+				{#<small style="font-style: italic;">URLen må slutte med et skråstrek!</small><br>#}<br />
 				<input type="submit" name="submit" class="btn btn-primary" value="Hent">
 			</form>
 			<p>

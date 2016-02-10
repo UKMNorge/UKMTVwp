@@ -12,6 +12,7 @@ class delete_controller extends UKMController {
 	public function delete($url) {
 
 		// Find ID from URL
+		$url = rtrim($url, '/').'/';
 		$url = explode ('/', $url);
 		$url = $url[count($url)-2];
 		$url = explode ('-', $url);

@@ -11,6 +11,7 @@ class download_controller extends UKMController {
 
 	public function fetch($url) {
 		// Find ID from URL
+		$url = rtrim($url, '/').'/';
 		$url = explode ('/', $url);
 		$url = $url[count($url)-2];
 		$url = explode ('-', $url);
@@ -23,9 +24,10 @@ class download_controller extends UKMController {
 
 		$tv = new TV($id);
 		#var_dump($tv);
-		
+		$tv->videofile();
 		$this->data['video'] = $tv;
 		$this->data['video_url'] = $tv->storageurl . $tv->file;
+		$this->data['file_path'] = $this->findFilePath($tv->cron_id);
 		#var_dump($this->data);
 		return false;
 		// Build query
@@ -40,5 +42,13 @@ class download_controller extends UKMController {
 			return true;
 		}	
 		return false;
+	}
+
+	public function findFilePath($id) {
+		$url = 'http://api.ukm.no/video:info/'.$id;
+		$curl = new UKMCURL();
+		$res = $curl->request($url);
+		#var_dump($res);
+		return $res->path->dir;
 	}
 }
