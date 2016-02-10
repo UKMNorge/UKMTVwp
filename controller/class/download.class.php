@@ -31,6 +31,11 @@ class download_controller extends UKMController {
 		
 		$tv->videofile();
 		#var_dump($tv);
+
+		// Sjekk om vi kun har 720p
+        if(substr($tv->file, -8, 4) == '720p') {
+            $this->data['720ponly'] = true;
+        }
 		$this->data['video'] = $tv;
 		$this->data['video_url'] = $tv->storageurl . $tv->file;
 		$this->data['file_path'] = $this->findFilePath($tv->cron_id);

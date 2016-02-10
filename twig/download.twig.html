@@ -31,7 +31,7 @@
 					</div><br />
 					<div class="row">
 						{# <a href="{{ video.storageurl }}{{ video.file_mobile }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Mobil-kvalitet</a> #}
-						<a href="{{ video.storageurl }}{{ video.file_orig }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
+						<a href="{{ video.storageurl }}{{ video.file_orig }}" {{ HDonly is defined ? 'disabled' : '' }} download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
 						<a href="{{ video.storageurl }}{{ video.file_720p }}" {{ video.file_exists_720p ? '' : 'disabled' }} download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Høy kvalitet (720p)</a>
 					</div>
 					<p>&nbsp;</p>
