@@ -23,6 +23,9 @@ function UKMTVwp_menu_network() {
 	$subpage = add_submenu_page('UKMTVwp_network', 'Last ned video', 'Last ned video', 'administrator', 'UKMTVwp_download', 'UKMTVwp_download');
 	add_action( 'admin_print_styles-' . $subpage, 'UKMTVwp_scripts_and_styles' );
 
+	$subpage = add_submenu_page('UKMTVwp_network', 'Clean caches', 'Clean caches', 'administrator', 'UKMTVwp_clean_cache', 'UKMTVwp_clean_cache');
+	add_action( 'admin_print_styles-' . $subpage, 'UKMTVwp_scripts_and_styles' );	
+
 } 
 
 
@@ -44,6 +47,10 @@ function UKMTVwp_network() {
 	require_once('UKM/inc/twig-admin.inc.php');
 	require_once('controller/home.controller.php');
 	echo $controller->render();
+}
+
+function UKMTVwp_clean_cache() {
+	require_once('cleancache.php');
 }
 
 function UKMTVwp_scripts_and_styles() {
