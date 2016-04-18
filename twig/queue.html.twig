@@ -31,7 +31,15 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
 		return false;
 	}
 	
-	if( data.action == 'delete' ) {
+	if( 'delete' == data.action ) {
+		job.slideUp(function() { 
+		    var group = job.parents('.ConvertGroup');
+			job.remove() 
+		    var remaining = group.find('.ConvertQueJob').length;
+		    group.find('.ConvertQueCount').html( remaining );
+		} );
+	} else if( 'store' == data.action ) {
+		alert('Sendt til lagring');
 		job.slideUp(function() { 
 		    var group = job.parents('.ConvertGroup');
 			job.remove() 
