@@ -27,7 +27,7 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
   
   jQuery.get( url, {}, function( data ) {
 	if( true != data.success ) {
-		job.find('.ajaxdata').html('Handling feilet med følgende melding: '+ data );
+		job.find('.ajaxdata').html( data );
 		return false;
 	}
 	
