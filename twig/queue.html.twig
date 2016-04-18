@@ -29,10 +29,12 @@ jQuery(document).on('click', '.ConvertQueDelete', function(e){
 	if( true !== data.success ) {
 		job.find('.ajaxdata').html('Sletting feilet med følgende melding: '+ data );
 	}
-	job.slideUp();
-    var group = job.parents('.ConvertGroup');
-    var remaining = group.find('ConvertQueJob').length;
-    group.find('ConvertQueCount').html( remaining );
+	job.slideUp(function() { 
+	    var group = job.parents('.ConvertGroup');
+		job.remove() 
+	    var remaining = group.find('.ConvertQueJob').length;
+	    group.find('.ConvertQueCount').html( remaining );
+	} );
   } );
 });
 </script>
