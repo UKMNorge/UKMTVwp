@@ -48,6 +48,14 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
 		    var remaining = group.find('.ConvertQueJob').length;
 		    group.find('.ConvertQueCount').html( remaining );
 		} );
+	} else if( 'registered' == data.action ) {
+		alert('Konverteringsprosessen resatt til "registered" - nyopplastet fil. Kjører hele prosessen på nytt.');
+		job.slideUp(function() { 
+		    var group = job.parents('.ConvertGroup');
+			job.remove() 
+		    var remaining = group.find('.ConvertQueJob').length;
+		    group.find('.ConvertQueCount').html( remaining );
+		} );
 	}
   } );
 });
