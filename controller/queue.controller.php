@@ -22,6 +22,6 @@ function videoconv_action_link( $action, $job ) {
 	return	'http://videoconverter.ukm.no/api/change_status.php?'
 		.	'action='. $action
 		.	'&id='. $job->id 
-		.	'&hash='. md5('delete'. $job->file_name . UKM_VIDEOSTORAGE_UPLOAD_KEY . $job->id)
+		.	'&hash='. md5( $action . $job->file_name . UKM_VIDEOSTORAGE_UPLOAD_KEY . $job->id)
 		;
 }
