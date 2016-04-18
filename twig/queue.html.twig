@@ -1,0 +1,59 @@
+<h1>Arbeidskø videoconverter</h1>
+<p class="lead">Lister ut alle konverteringsjobber som ikke er fullført eller merket med "does_not_exist", som betyr at vi har gitt opp jobben</p>
+
+<style>
+.well.ukmwell {
+    background: white;
+    padding: 10px 15px;
+    box-shadow: 1px 1px rgb(220, 220, 220);
+}
+
+.ukmwell h1, 
+.ukmwell h2, 
+.ukmwell h3, 
+.ukmwell p,
+.ukmwell ol {
+	margin: 0px;
+}
+</style>
+
+<script language="javascript">
+jQuery(document).on('click', '.ConvertQueDelete', function(e){
+  e.preventDefault();
+  var job = jQuery(this).parents('div.ConvertQueJob');
+  var url = jQuery(this).attr('href');
+  
+  job.find('.ajaxdata').html('Laster inn..' + url );
+  
+  jQuery.get( url, {}, function( data ) {
+	if( true !== data.success ) {
+		job.find('.ajaxdata').html('Sletting feilet med følgende melding: '+ data );
+	}
+	job.slideUp();
+  } );
+  
+});
+</script>
+
+<div class="col-xs-12">
+{% for groupname, group in list %}
+	<h1>{{ groupname }} <small>{{ group|length }}</small></h1>
+	{% for job in group %}
+		<div class="{{ job.admin_notice == 'true' ? 'alert alert-danger' : 'well' }} ukmwell ConvertQueJob" id="cron{{ job.id }}">
+			<ol class="list-inline">
+				<li>
+					<h2>{{ job.id }}</h2>
+				</li>
+				<li>
+					{{ job.touch|date('d. M y H:i') }}
+				</li>
+				<li>
+					<a class="btn btn-sm btn-danger ConvertQueDelete" href="{{ job.link.delete }}" target="_blank">Slett</a>
+				</li>
+			</ol>
+			<div class="ajaxdata"></div>
+			<div class="clearfix"></div>
+		</div>
+	{% endfor %}
+{% endfor %}
+</div>
