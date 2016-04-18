@@ -66,10 +66,10 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
 				<div class="clearfix"></div>
 				<div style="cursor:help;">
 					<small>
-						  <span title="Status progress">{{ job.status_progress }}</span> 
-						| <span title="Status first convert">{{ job.status_first_convert }}</span>
-						| <span title="Status final convert">{{ job.status_final_convert }}</span>
-						| <span title="Status archive convert">{{ job.status_archive }}</span>
+						  <span title="Status progress">{{ job.status_progress is empty ? 'null' : job.status_progress }}</span> 
+						| <span title="Status first convert">{{ job.status_first_convert is empty ? 'null' : job.status_first_convert }}</span> 
+						| <span title="Status final convert">{{ job.status_final_convert is empty ? 'null' : job.status_final_convert }}</span> 
+						| <span title="Status archive convert">{{ job.status_archive is empty ? 'null' : job.status_archive }}</span> 
 					</small>
 				</div>
 				<div class="ajaxdata"></div>
