@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Last ned video :: UKM-TV</title>
+		{# <link rel="stylesheet" href="http://<?= UKM_HOSTNAME ?>/wp-content/themes/UKMresponsive/vendor/bootstrap/3.0.1/css/bootstrap.css"> #}
+	</head>
+
+	<body>
+		<div class="UKMwidth">
+			{% if flash is defined %}
+				<br>
+				<div class="alert alert-{{ flash[0] }}"><span>{{ flash[1]|nl2br }}</span></div>
+			{% endif %}
+			{% if deleted is defined %}
+				<div class="col-xs-12 col-md-8">
+					<h4 class="alert alert-danger">Videoen er slettet, og kan ikke lastes ned.</h4>
+				</div>
+				<div class="clearfix"></div>
+			{% endif %}
+			{% if video is defined %}
+				<p>&nbsp;</p>
+				<div class="col-xs-12 col-md-8">
+					<div class="row">
+						<img style="max-width: 100%;" src="{{ video.storageurl }}{{ video.img }}">
+					</div>
+					<div class="row">
+						<h3>{{ video.title }}</h3>
+					</div>
+					<div class="row">
+						<a href="{{ video.storageurl }}{{ video.img }}" download="{{ video.title }}" class="btn btn-primary">Kun bilde</a>
+					</div><br />
+					<div class="row">
+						{# <a href="{{ video.storageurl }}{{ video.file_mobile }}" download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Mobil-kvalitet</a> #}
+						<a href="{{ video.storageurl }}{{ video.file_orig }}" {{ HDonly is defined ? 'disabled' : '' }} download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Normal kvalitet</a>
+						<a href="{{ video.storageurl }}{{ video.file_720p }}" {{ video.file_exists_720p ? '' : 'disabled' }} download="{{ video.title }}{{ video.ext }}" class="btn btn-primary">Høy kvalitet (720p)</a>
+					</div>
+					<br />
+					<p style="font-style: italic;">Tips: Noen nettlesere åpner filen heller enn å laste den ned. Høyreklikk på knappen og velg "Lagre som" for å lagre i dette tilfellet.</p>
+					<p>&nbsp;</p>
+				</div>
+				<div class="clearfix"></div>
+				<div class="">
+					<span class="alert alert-info">Filene ligger på Dig.Ark i mappen {{ file_path }}</span>
+				</div>
+			<div class="clearfix"></div>
+			<p>&nbsp;</p>
+			{% endif %}
+			<h1>Last ned video</h1>
+			<p class="lead">Kopier inn URLen fra UKM-tv for å hente nedlastings-lenkene.</p>
+			<form method="GET">
+				<input type="hidden" name="page" value="UKMTVwp_download">
+				<label for="video_url" class="">Lim inn URLen her</label>
+				<input type="text" name="video_url" class="form-control">
+				{#<small style="font-style: italic;">URLen må slutte med et skråstrek!</small><br>#}<br />
+				<input type="submit" name="submit" class="btn btn-primary" value="Hent">
+			</form>
+			<p>
+				
+			</p>
+		</div>
+		<div class="UKMwidth">
+		</div>
+	</body>
+</html>

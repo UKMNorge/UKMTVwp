@@ -1,2 +1,33 @@
 <h2>UKM-TV admin</h2>
-<p>Kommer snart</p>
+<div class="container" style="margin-left:0px!important;">
+	<div class="row">
+		<div class="col-xs-12">
+			<fieldset>
+				<legend>Kvalitetsnivå</legend>
+				<p>I perioder med høy pågang er det mulig å sende ut mobile-filer til alle enheter. Dette reduserer typisk båndbredden fra 100mb per film til 30mb per film</p>
+				
+				{% if mode == 'low' %}
+					<div class="col-xs-12 col-sm-6 alert alert-danger">				
+						<div class="pull-right">
+							<a href="?page=UKMTVwp_network&bandwidth=normal" class="btn btn-sm btn-success">Aktiver normaldrift</a>
+						</div>
+	
+						<h4>Sparemodus aktivert</h4>
+	
+						<div class="clearfix"></div>
+					</div>				
+				{% else %}
+					<div class="col-xs-12 col-sm-6 alert alert-success">				
+						<div class="pull-right">
+							<a href="?page=UKMTVwp_network&bandwidth=low" class="btn btn-sm btn-danger">Aktiver sparemodus</a>
+						</div>
+	
+						<h4>Normal drift aktivert</h4>
+	
+						<div class="clearfix"></div>
+					</div>
+				{% endif %}
+			</fieldset>
+		</div>
+	</div>
+</div>

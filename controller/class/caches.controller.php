@@ -13,11 +13,22 @@ class controller_caches extends UKMcontroller {
 		
 		$this->data['caches'] = array();
 		
-		$caches_query = new SQL("SELECT `id`, `ip`, `status`, `last_heartbeat` FROM `ukm_tv_caches_caches`");
+		$caches_query = new SQL("SELECT * FROM `ukm_tv_caches_caches`");
 		$res = $caches_query->run( $caches_query );
 		while( $r = mysql_fetch_assoc( $res ) ) {
 			$this->data['caches'][] = $r;
 		}
 	}
 
+
+	public function activateCache( $cache ) {
+		$SQL = new SQLins('ukm_tv_caches_caches', array('id' => $cache ) );
+		$SQL->add('deactivated', 0);
+		$SQL->run();
+	}
+	public function deactivateCache( $cache ) {
+		$SQL = new SQLins('ukm_tv_caches_caches', array('id' => $cache ) );
+		$SQL->add('deactivated', 1);
+		$SQL->run();		
+	}
 }
