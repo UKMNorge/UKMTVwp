@@ -46,8 +46,16 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
 		    var remaining = group.find('.ConvertQueJob').length;
 		    group.find('.ConvertQueCount').html( remaining );
 		} );
+	} else if( 'log' == data.action ) {
+		job.find('.ajaxdata').html( data.log.replace(/(?:\r\n|\r|\n)/g, '<br />') );
+		job.find('.ajaxdata').append( '<p><a class="EmptyAjaxData" href="#">Skjul</a></p>' );
 	}
   } );
+});
+
+jQuery(document).on('click', '.EmptyAjaxData', function(e) {
+	e.preventDefault();
+	jQuery(this).parents('.ajaxdata').html('');
 });
 </script>
 
@@ -65,6 +73,7 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
 						{{ job.touch|date('d. M y H:i') }}
 					</li>
 					<li>
+						<a class="btn btn-sm btn-success ConvertQueAction" href="{{ job.link.log }}" target="_blank">Vis logg</a>
 						<a class="btn btn-sm btn-primary ConvertQueAction" href="{{ job.link.store }}" target="_blank">Lagre på nytt</a>
 						<a class="btn btn-sm btn-primary ConvertQueAction" href="{{ job.link.converting }}" target="_blank">Konvertér på nytt</a> 
 						<a class="btn btn-sm btn-info ConvertQueAction" href="{{ job.link.registered }}" target="_blank">Konvertér fra starten</a>
