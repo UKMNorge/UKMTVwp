@@ -27,7 +27,9 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
   
   jQuery.get( url, {}, function( data ) {
 	if( true != data.success ) {
-		job.find('.ajaxdata').html( data );
+		job.find('.ajaxdata').html( data.replace(/(?:\r\n|\r|\n)/g, '<br />') );
+		job.find('.ajaxdata').append( '<p><a class="EmptyAjaxData" href="#">Skjul</a></p>' );
+
 		return false;
 	}
 	
@@ -46,9 +48,6 @@ jQuery(document).on('click', '.ConvertQueAction', function(e){
 		    var remaining = group.find('.ConvertQueJob').length;
 		    group.find('.ConvertQueCount').html( remaining );
 		} );
-	} else if( 'log' == data.action ) {
-		job.find('.ajaxdata').html( data.log.replace(/(?:\r\n|\r|\n)/g, '<br />') );
-		job.find('.ajaxdata').append( '<p><a class="EmptyAjaxData" href="#">Skjul</a></p>' );
 	}
   } );
 });
