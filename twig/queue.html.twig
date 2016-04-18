@@ -18,7 +18,7 @@
 </style>
 
 <script language="javascript">
-jQuery(document).on('click', '.ConvertQueDelete', function(e){
+jQuery(document).on('click', '.ConvertQueAction', function(e){
   e.preventDefault();
   var job = jQuery(this).parents('div.ConvertQueJob');
   var url = jQuery(this).attr('href');
@@ -27,14 +27,18 @@ jQuery(document).on('click', '.ConvertQueDelete', function(e){
   
   jQuery.get( url, {}, function( data ) {
 	if( true !== data.success ) {
-		job.find('.ajaxdata').html('Sletting feilet med følgende melding: '+ data );
+		job.find('.ajaxdata').html('Handling feilet med følgende melding: '+ data );
+		return false;
 	}
-	job.slideUp(function() { 
-	    var group = job.parents('.ConvertGroup');
-		job.remove() 
-	    var remaining = group.find('.ConvertQueJob').length;
-	    group.find('.ConvertQueCount').html( remaining );
-	} );
+	
+	if( data.action == 'delete' ) {
+		job.slideUp(function() { 
+		    var group = job.parents('.ConvertGroup');
+			job.remove() 
+		    var remaining = group.find('.ConvertQueJob').length;
+		    group.find('.ConvertQueCount').html( remaining );
+		} );
+	}
   } );
 });
 </script>
@@ -53,9 +57,21 @@ jQuery(document).on('click', '.ConvertQueDelete', function(e){
 						{{ job.touch|date('d. M y H:i') }}
 					</li>
 					<li>
-						<a class="btn btn-sm btn-danger ConvertQueDelete" href="{{ job.link.delete }}" target="_blank">Slett</a>
+						<a class="btn btn-sm btn-primary ConvertQueAction" href="{{ job.link.store }}" target="_blank">Lagre på nytt</a>
+						<a class="btn btn-sm btn-primary ConvertQueAction" href="{{ job.link.converting }}" target="_blank">Konvertér på nytt</a> 
+						<a class="btn btn-sm btn-info ConvertQueAction" href="{{ job.link.registered }}" target="_blank">Konvertér fra starten</a>
+						<a class="btn btn-sm btn-danger ConvertQueAction" href="{{ job.link.delete }}" target="_blank">Slett</a>
 					</li>
 				</ol>
+				<div class="clearfix"></div>
+				<div style="cursor:help;">
+					<small>
+						  <span title="Status progress">{{ job.status_progress }}</span> 
+						| <span title="Status first convert">{{ job.status_first_convert }}</span>
+						| <span title="Status final convert">{{ job.status_final_convert }}</span>
+						| <span title="Status archive convert">{{ job.status_archive }}</span>
+					</small>
+				</div>
 				<div class="ajaxdata"></div>
 				<div class="clearfix"></div>
 			</div>

@@ -9,8 +9,19 @@ $list = (array) $curl->request('http://videoconverter.ukm.no/api/queue.php');
 foreach( $list as $group => $jobs ) {
 	foreach( $jobs as $job ) {
 		$job->link = new stdClass();
-		$job->link->delete = 'http://videoconverter.ukm.no/api/change_status.php?action=delete&id='. $job->id 
-							.'&hash='. md5('delete'. $job->file_name . UKM_VIDEOSTORAGE_UPLOAD_KEY . $job->id );
+		$job->link->delete 		= videoconv_action_link('delete', $job );
+		$job->link->store 		= videoconv_action_link('store', $job );
+		$job->link->registered 	= videoconv_action_link('registered', $job );
+		$job->link->converting 	= videoconv_action_link('converting', $job );
+
 	}
 }
 $TWIGdata['list'] = $list;
+
+function videoconv_action_link( $action, $job ) {
+	return	'http://videoconverter.ukm.no/api/change_status.php?'
+		.	'action='. $action
+		.	'&id='. $job->id 
+		.	'&hash='. md5('delete'. $job->file_name . UKM_VIDEOSTORAGE_UPLOAD_KEY . $job->id)
+		;
+}
