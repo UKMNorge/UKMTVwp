@@ -44,7 +44,7 @@ class download_controller extends UKMController {
 	}
 
 	public function findFilePath($id) {
-		$url = 'http://api.ukm.no/video:info/'.$id;
+		$url = 'https://api.ukm.no/video:info/'.$id;
 		$curl = new UKMCURL();
 		$res = $curl->request($url);
 		#var_dump($res);

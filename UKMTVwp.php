@@ -11,7 +11,7 @@ Author URI: http://www.ukm-norge.no
 add_action('network_admin_menu', 'UKMTVwp_menu_network');
 
 function UKMTVwp_menu_network() {
-	$page = add_menu_page('UKM-TV', 'UKM-TV', 'administrator', 'UKMTVwp_network','UKMTVwp_network', 'http://ico.ukm.no/UKM-TVsmall.png', 500);
+	$page = add_menu_page('UKM-TV', 'UKM-TV', 'administrator', 'UKMTVwp_network','UKMTVwp_network', '//ico.ukm.no/UKM-TVsmall.png', 500);
 	add_action( 'admin_print_styles-' . $page, 'UKMTVwp_scripts_and_styles' );
 
 	$subpage = add_submenu_page('UKMTVwp_network', 'Caches', 'Caches', 'administrator', 'UKMTVwp_network_caches', 'UKMTVwp_network_caches');
