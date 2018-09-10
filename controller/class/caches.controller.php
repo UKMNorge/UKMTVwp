@@ -15,7 +15,7 @@ class controller_caches extends UKMcontroller {
 		
 		$caches_query = new SQL("SELECT * FROM `ukm_tv_caches_caches`");
 		$res = $caches_query->run( $caches_query );
-		while( $r = mysql_fetch_assoc( $res ) ) {
+		while( $r = SQL::fetch( $res ) ) {
 			$this->data['caches'][] = $r;
 		}
 	}

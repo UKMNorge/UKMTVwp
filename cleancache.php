@@ -24,7 +24,7 @@ if(!$res) {
 }
 $count = 0;
 $errors = 0;
-while($cache = mysql_fetch_assoc($res)) {
+while($cache = SQL::fetch($res)) {
 	if ($cache['id'] == $main) {
 		echo "UKMTVwp_cache_clean: Skipping cache with id ".$cache['id'];
 		error_log("UKMTVwp_cache_clean: Skipping cache with id ".$cache['id']);
