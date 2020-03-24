@@ -1,12 +1,22 @@
 <?php
-## Side for å slette video fra UKM-tv
-require_once('class/delete.class.php');	
 
-$delete = new delete_controller();
+use UKMNorge\Filmer\UKMTV\Filmer;
+use UKMNorge\Filmer\UKMTV\Write;
 
-if ($_GET['video_url']) {
-	$delete->delete($_GET['video_url']);
-
-}	
-
-echo $delete->render();
+try {
+    $film = Filmer::getById(
+        Filmer::getIdFromUrl( $_POST['video_url'] )
+    );
+    Write::slett($film);
+    UKMTV_wpadmin::addViewData('deleted',$film);
+} catch( Exception $e ) {
+    if( $e->getCode() == 143001 ) {
+        UKMTV_wpadmin::getFlash()->error(
+            'Fant ikke filmens id fra URL-adressen.'
+        );
+    } else {
+        UKMTV_wpadmin::getFlash()->error(
+            'En ukjent feil oppsto ved sletting av filmen. Serveren sa: '. $e->getMessage()
+        );
+    }
+}

@@ -19,7 +19,8 @@ foreach( $list as $group => $jobs ) {
 
 	}
 }
-$TWIGdata['list'] = $list;
+
+UKMTV_wpadmin::addViewData('list', $list);
 
 function videoconv_action_link( $action, $job ) {
 	return	'https://videoconverter.ukm.no/api/change_status.php?'

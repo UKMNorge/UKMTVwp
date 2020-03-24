@@ -1,0 +1,54 @@
+<fieldset>
+    <legend style="margin-bottom: .2em;">
+        {% if not caches.harAktivCache() %}
+			<span class="pull-right dashicons dashicons-warning text-danger" style="font-size: 1.2em;"></span>
+		{% endif %}
+        Aktive cache-servere
+    </legend>
+    <ul>
+        <li>
+            Alle cacher rapporterer selv inn status så lenge de fungerer som de skal.
+        </li>
+        <li>
+            UKM-TV sender ikke brukere til deaktiverte cacher, eller cacher med annen status enn OK.
+        </li>
+        <li>
+            Deaktiverte cacher vil ikke vite at de er deaktivert, og svarer som normalt på forespørsler.
+        </li>
+        <li>
+            Caching i nettlesere og CloudFlare gjør at det må beregnes noe tid fra en cache deaktiveres til den ikke lengre får forespørsler.
+        </li>
+    </ul>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Status</th>
+            <th>Siste heartbeat</th>
+            <th></th>
+        </tr>
+
+        {% for cache in caches.getAll() %}
+        <tr class="text-{{ cache.erAktiv() ? 'success' : 'danger' }}">
+            <td>{{ cache.getId() }}</td>
+            <td>{{ cache.getIp() }}</td>
+            <td>
+                {% if cache.erAktiv() %}
+                    AKTIV
+                {% else %}
+                    DEAKTIVERT
+                {% endif %}
+            </td>
+            <td>{{ cache.last_heartbeat|dato('d.m.Y H:i:s') }}</td>
+            <td>
+                {% if cache.erAktiv() %}
+                    <a href="?page={{GET('page')}}&deaktiver={{ cache.getId() }}" class="btn btn-xs btn-ukm btn-danger">Deaktiver cache</a>
+                {% else %}
+                    <a href="?page={{GET('page')}}&aktiver={{ cache.getId() }}" class="btn btn-xs btn-ukm">Aktiver cache</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</fieldset>

@@ -1,0 +1,15 @@
+<fieldset>
+	<legend style="margin-bottom: .2em;">
+		Last ned eller slett film
+    </legend>
+    <form method="POST" action="?page={{GET('page')}}" style="margin-bottom:0;">
+        <div class="form-group" style="margin-bottom: .2em;">
+            Lim inn URL til filmen:
+            <input type="text" name="video_url" class="form-control" placeholder="https://tv.{{UKM_HOSTNAME}}/...." />
+        </div>
+        <div class="form-group" style="margin-bottom: .2em;">
+            <input type="submit" name="downloadFilm" class="btn btn-ukm btn-sm" value="Hent nedlastingslenker">
+            <input type="submit" name="deleteFilm" class="btn btn-ukm btn-xs btn-danger" value="Slett film" style="margin-left: 2em;">
+        </div>
+    </form>
+</fieldset>

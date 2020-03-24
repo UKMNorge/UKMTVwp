@@ -1,0 +1,18 @@
+<fieldset>
+	<legend style="margin-bottom: .2em;">
+		Kvalitetsnivå
+		{% if bandwidthmode.erSparemodus() %}
+			<span class="pull-right dashicons dashicons-warning text-danger" style="font-size: 1.2em;"></span>
+		{% endif %}
+	</legend>
+	<p class="text-muted mt-0">
+		I perioder med høy pågang er det mulig å sende ut mobile-filer til alle enheter. 
+        Dette reduserer typisk båndbredden fra 100mb per film til 30mb per film.
+	</p>
+	{% if bandwidthmode.erSparemodus() %}
+		<a href="?page={{GET('page')}}&bandwidth=normal" class="btn btn-sm btn-ukm btn-success">Aktiver normaldrift</a>
+	{% else %}
+		<a href="?page={{GET('page')}}&bandwidth=low" class="btn btn-sm btn-ukm btn-danger">Aktiver sparemodus</a>
+	{% endif %}
+
+</fieldset>
