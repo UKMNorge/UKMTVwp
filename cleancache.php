@@ -6,10 +6,14 @@
 # If it expires, add 81.0.146.164 to cache DB. (Static IP for wowza.video.ukm.no per 01.03.2016)
 
 # Oops: Check timezone!
+
+use UKMNorge\Database\SQL\Delete;
+use UKMNorge\Database\SQL\Query;
+
 $time = time() - (2*60); # Two minutes from now
 $main = 1;
 
-$caches = new SQL("SELECT * 
+$caches = new Query("SELECT * 
 					FROM `ukm_tv_caches_caches` 
 					WHERE UNIX_TIMESTAMP(`last_heartbeat`) < '#time'
 					AND `deactivated` = 1", array('time' => $time));
@@ -24,13 +28,13 @@ if(!$res) {
 }
 $count = 0;
 $errors = 0;
-while($cache = SQL::fetch($res)) {
+while($cache = Query::fetch($res)) {
 	if ($cache['id'] == $main) {
 		echo "UKMTVwp_cache_clean: Skipping cache with id ".$cache['id'];
 		error_log("UKMTVwp_cache_clean: Skipping cache with id ".$cache['id']);
 		continue;
 	}
-	$del = new SQLdel('ukm_tv_caches_caches', array('id' => $cache['id']));
+	$del = new Delete('ukm_tv_caches_caches', array('id' => $cache['id']));
 
 	#echo $del->debug();
 	$res2 = $del->run();

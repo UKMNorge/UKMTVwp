@@ -1,8 +1,7 @@
 <?php
 
 require_once('_class.controller.php');
-require_once('UKM/sql.class.php');
-require_once('UKM/tv.class.php');
+require_once('UKM/Autoloader.php');
 
 class download_controller extends UKMController {
 	public function __construct() {

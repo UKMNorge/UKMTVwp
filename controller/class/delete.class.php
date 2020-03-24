@@ -1,7 +1,9 @@
 <?php
 
+use UKMNorge\Database\SQL\Update;
+
 require_once('_class.controller.php');
-require_once('UKM/sql.class.php');
+require_once('UKM/Autoloader.php');
 
 class delete_controller extends UKMController {
 
@@ -26,7 +28,7 @@ class delete_controller extends UKMController {
 			return;
 		}
 		// Build query
-		$qry = new SQLins('ukm_tv_files', array('tv_id' => $id));
+		$qry = new Update('ukm_tv_files', array('tv_id' => $id));
 		$qry->add('tv_deleted', 'true');
 		#echo $qry->debug();
 		$res = $qry->run();
