@@ -36,4 +36,27 @@ if (isset($_GET['deaktiver'])) {
     }
 }
 
+if(isset($_GET['cleancaches'])) {
+    try {
+        $res = Caches::deleteInactiveCaches();
+
+        if( sizeof($res['success']) > 0 ) {
+            UKMTV_wpadmin::getFlash()->success(
+                sizeof($res['success']) .' inaktive cacher ble fjernet fra oversikten'
+            );
+        }
+
+        if( sizeof($res['error']) > 0 ) {
+            UKMTV_wpadmin::getFlash()->error(
+                sizeof($res['error']) .' inaktive cacher kunne ikke slettes. (ID:'. implode(',', $res['error']) .')'
+            );
+        }
+    } catch( Exception $e ) {
+        UKMTV_wpadmin::getFlash()->error(
+            'Kunne ikke fjerne inaktive cacher. Systemet sa: '.
+            $e->getMessage()
+        );
+    }
+}
+
 UKMTV_wpadmin::addViewData('caches', Caches::getAllInkludertInaktive());

@@ -5,6 +5,9 @@
 		{% endif %}
         Aktive cache-servere
     </legend>
+    <div class="pull-right">
+        <a href="?page={{GET('page')}}&cleancaches=true" class="btn btn-xs btn-ukm">Slett gamle inaktive servere</a>
+    </div>
     <ul>
         <li>
             Alle cacher rapporterer selv inn status så lenge de fungerer som de skal.
