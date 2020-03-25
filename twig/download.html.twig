@@ -1,0 +1,47 @@
+<fieldset style="margin-bottom: 2em;">
+	<legend style="margin-bottom: .2em;">
+		Last ned:
+		{{download.getTitle()}}
+	</legend>
+	<div class="row">
+		<div class="col-xs-12">
+			<img src="{{ download.getImageUrl()}}" style="width:100%" />
+		</div>
+		<div class="col-xs-12">
+			<p class="text-muted" style="margin-top: 1em;">
+				Høyreklikk og velg "lagre som" for å laste ned de ulike utgavene.
+			</p>
+			<ol class="list-group">
+                {% if download.har720p() %}
+                    <li class="list-group-item">
+                        <b>Mobil:</b>
+                        <a href="{{storage ~ download.getServerFilepath() ~ download.getFileMobile() }}">
+                            {{ download.getFileMobile() }}
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>720p:</b>
+                        <a href="{{storage ~ download.getServerFilepath() ~ download.getFile720() }}">
+                            {{ download.getFile720() }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">
+                        <b>Video:</b>
+                        <a href="{{storage ~ download.getServerFilepath() }}">
+                            {{storage ~ download.getServerFilepath() }}
+                        </a>
+                    </li>
+                {% endif %}
+				<li class="list-group-item">
+					<b>1080p:</b>
+                    I dig.ark finner du denne i <code>UKMTV{{ digarkpath }}</code>
+				</li>
+                <li class="list-group-item">
+                    <b>Bilde:</b>
+                    <a href="{{download.getImageUrl()}}">{{download.getImageUrl()|split('/')|last}}</a>
+                </li>
+			</ol>
+		</div>
+	</div>
+</fieldset>
