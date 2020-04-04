@@ -1,6 +1,9 @@
 <?php
 
 use UKMNorge\Filmer\UKMTV\Server\BandwidthMode;
+use UKMNorge\Meta\Collection;
+use UKMNorge\Meta\ParentObject;
+use UKMNorge\Meta\Write;
 
 // BANDWIDTH-MODE
 if( isset($_GET['bandwidth'])) {
@@ -20,3 +23,14 @@ if( isset($_POST['downloadFilm'])) {
 
 // CACHE-SERVERE
 UKMTV_wpadmin::require('controller/caches.controller.php');
+
+// LIVESTREAM
+$livestream = new Collection(
+    new ParentObject('livestream',0)
+);
+if( $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['livestream_pass']) ) {
+    Write::set( $livestream->get('brukernavn')->set('ukmnorge') );
+    Write::set( $livestream->get('passord')->set($_POST['livestream_pass']) );
+    UKMTV_wpadmin::getFlash()->success('Oppdatert livestream-innstillinger');
+}
+UKMTV_wpadmin::addViewData('livestream', $livestream);

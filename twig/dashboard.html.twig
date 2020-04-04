@@ -15,20 +15,20 @@
                 {% endif %}
                 {% include "dashboard/film.html.twig" %}
 			</div>
+
+            <div class="card" style="max-width: 100% !important; min-width: auto;">
+			    {% include "dashboard/caches.html.twig" %}
+            </div>
         </div>
 
 		<div class="col-xs-12 col-md-4">
 			<div class="card" style="max-width: 100% !important; min-width: auto;">
+				{% include "dashboard/direkte.html.twig" %}
+			</div>
+		
+        	<div class="card" style="max-width: 100% !important; min-width: auto;">
 				{% include "dashboard/bandwidthmode.html.twig" %}
 			</div>
 		</div>
 	</div>
-
-    <div class="row">
-        <div class="col-xs-12">
-			<div class="card" style="max-width: 100% !important; min-width: auto;">
-			    {% include "dashboard/caches.html.twig" %}
-            </div>
-        </div>
-    </div>
 </div>

@@ -1,0 +1,19 @@
+<fieldset>
+	<legend style="margin-bottom: .2em;">
+		Direktesending
+	</legend>
+	<a href="https://livestream.com/" class="pull-right btn btn-xs btn-ukm" target="_blank">Logg inn på livestream.com</a>
+	<form method="POST" action="?page={{GET('page')}}" style="margin-bottom: 0;">
+		<b>Brukernavn:</b>
+		{{ livestream.getValue('brukernavn') }}
+		<br/>
+		<div class="form-group" style="margin-bottom: 0;">
+			<b>Passord:</b>
+			<input type="text" class="form-control" value="{{livestream.getValue('passord') }}" name="livestream_pass"/>
+		</div>
+
+		<div class="form-group" style="margin-bottom: 0;">
+			<button type="submit" class="btn btn-success btn-xs btn-ukm">Lagre</button>
+		</div>
+	</form>
+</fieldset>
