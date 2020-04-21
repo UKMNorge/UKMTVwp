@@ -29,7 +29,7 @@ $livestream = new Collection(
     new ParentObject('livestream',0)
 );
 if( $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['livestream_pass']) ) {
-    Write::set( $livestream->get('brukernavn')->set('ukmnorge') );
+    Write::set( $livestream->get('brukernavn')->set(LIVESTREAM_EMAIL) );
     Write::set( $livestream->get('passord')->set($_POST['livestream_pass']) );
     UKMTV_wpadmin::getFlash()->success('Oppdatert livestream-innstillinger');
 }
