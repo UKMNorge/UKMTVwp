@@ -18,7 +18,7 @@ foreach( $list as $group => $jobs ) {
 		$job->link->store 		= videoconv_action_link('store', $job );
 		$job->link->registered 	= videoconv_action_link('registered', $job );
 		$job->link->converting 	= videoconv_action_link('converting', $job );
-		$job->link->log 		= 'https://videoconverter.ukm.no/api/log.php?id='. $job->id 
+		$job->link->log 		= 'https://videoconverter.'.UKM_HOSTNAME.'/api/log.php?id='. $job->id 
 								. '&hash='. md5( 'log' . $job->file_name . UKM_VIDEOSTORAGE_UPLOAD_KEY . $job->id)
 								;
 
