@@ -1,10 +1,15 @@
 <?php
 $TWIGdata = array();
 
+require_once('UKMconfig.inc.php');
 require_once('UKM/curl.class.php');
 
 $curl = new UKMCurl();
-$list = (array) $curl->request('https://videoconverter.ukm.no/api/queue.php');
+$url = 'https://videoconverter.'.UKM_HOSTNAME.'/api/queue.php';
+if (UKM_HOSTNAME == 'ukm.dev' ) {
+	$curl->timeout(5); // 5s timeout in dev seems plenty in testing
+}
+$list = (array) $curl->request($url);
 
 foreach( $list as $group => $jobs ) {
 	foreach( $jobs as $job ) {
